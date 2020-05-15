@@ -10,16 +10,17 @@ from torch.nn import init
 from utils import BasicBlock, Bottleneck, BBoxTransform, ClipBoxes
 from anchors import Anchors
 import losses
-from lib.nms.pth_nms import pth_nms
+#from lib.nms.pth_nms import pth_nms
+from torchvision.ops import nms
 from dataloader import UnNormalizer
 unnormalize = UnNormalizer()
 
-
+"""
 def nms(dets, thresh):
     "Dispatch to either CPU or GPU NMS implementations.\
-    Accept dets as tensor"""
+    Accept dets as tensor
     return pth_nms(dets, thresh)
-
+"""
 
 class PyramidFeatures(nn.Module):
     def __init__(self, C3_size, C4_size, C5_size, feature_size=256):
@@ -336,7 +337,8 @@ class ResNet(nn.Module):
             transformed_anchors = transformed_anchors[:, scores_over_thresh, :]
             scores = scores[:, scores_over_thresh, :]
 
-            anchors_nms_idx = nms(torch.cat([transformed_anchors, scores], dim=2)[0, :, :], 0.3)
+            #anchors_nms_idx = nms(torch.cat([transformed_anchors, scores], dim=2)[0, :, :], 0.3)
+            anchors_nms_idx = nms(transformed_anchors,scores,0.3)
             nms_scores, nms_class = classification[0, anchors_nms_idx, :].max(dim=1)
             return [nms_scores, nms_class, transformed_anchors[0, anchors_nms_idx, :]]
 
