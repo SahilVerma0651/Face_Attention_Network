@@ -7,7 +7,7 @@ Pytorch implementation of face attention network as described in [Face Attention
 ## Requirements
 
 - Python3
-- Pytorch0.4
+- Pytorch
 - torchvision
 - tensorboardX
 
