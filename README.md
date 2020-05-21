@@ -23,22 +23,18 @@ pip install pandas
 pip install tensorboardX
 ```
 
-Build NMS.
-
-```
-cd Face_Attention_Network/lib
-sh build.sh
-```
 
 Create folders.
 
 ```
 cd Face_Attention_Network/
 mkdir ckpt mAP_txt summary weight
+mkdir Dataset
 ```
 
 ## Datasets
-You should prepare three CSV or TXT files including train annotations file, valid annotations file and label encoding file. 
+Download the dataset from the following link and extract it to Dataset foldeer
+-widerface: [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/) 
 
 ### Annotations format
 Two examples are as follows:
